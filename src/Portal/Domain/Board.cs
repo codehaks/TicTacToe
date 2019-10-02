@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Portal.Domain
@@ -10,17 +11,34 @@ namespace Portal.Domain
         {
             Positions = new List<Position>
             {
-                new Position(PositionType.One,PositionState.Empty),
-                new Position(PositionType.Two,PositionState.Empty),
-                new Position(PositionType.Three,PositionState.Empty),
-                new Position(PositionType.Four,PositionState.Empty),
-                new Position(PositionType.Five,PositionState.Empty),
-                new Position(PositionType.Six,PositionState.Empty),
-                new Position(PositionType.Seven,PositionState.Empty),
-                new Position(PositionType.Eight,PositionState.Empty),
-                new Position(PositionType.Nine,PositionState.Empty),
+                new Position(PositionType.One),
+                new Position(PositionType.Two),
+                new Position(PositionType.Three),
+                new Position(PositionType.Four),
+                new Position(PositionType.Five),
+                new Position(PositionType.Six),
+                new Position(PositionType.Seven),
+                new Position(PositionType.Eight),
+                new Position(PositionType.Nine),
             };
         }
+
+        internal void Fork(PositionType positionType,MarkerType marker)
+        {
+            var pos=Positions.Single(p => p.Type == positionType);
+            switch (marker)
+            {
+                case MarkerType.X:
+                    pos.State = PositionState.X;
+                    break;
+                case MarkerType.O:
+                    pos.State = PositionState.O;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public IList<Position> Positions { get; private set; }
         
     }

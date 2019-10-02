@@ -14,7 +14,7 @@ namespace Portal.Domain
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public MarkerType Marker { get; set; }
+        public MarkerType Marker { get; }
 
     }
 }

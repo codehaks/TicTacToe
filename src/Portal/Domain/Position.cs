@@ -6,12 +6,12 @@ namespace Portal.Domain
 {
     public class Position
     {
-        public Position(PositionType type,PositionState state)
+        public Position(PositionType type)
         {
             Type = type;
-            State = state;
+            State = PositionState.Empty;
         }
-        public PositionType Type { get; set; }
+        public PositionType Type { get; private set; }
         public PositionState State { get; set; }
     }
 

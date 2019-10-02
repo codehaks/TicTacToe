@@ -6,7 +6,14 @@ namespace Portal.Domain
 {
     public class Move
     {
-        public Player Player { get; set; }
-        public Position Position { get; set; }
+        public Move(Player player,PositionType positionType)
+        {
+            Player = player;
+            PositionType = positionType;
+        }
+        public Player Player { get; }
+        public PositionType PositionType { get;}
     }
+
+   
 }
