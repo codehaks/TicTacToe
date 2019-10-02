@@ -10,59 +10,18 @@ namespace Portal.Domain
         {
             Positions = new List<Position>
             {
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.One
-                },
-
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Two
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Three
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Four
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Five
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Six
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Seven
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Eight
-                },
-                new Position
-                {
-                    State = PositionState.Empty,
-                    Type = PositionType.Nine
-                },
+                new Position(PositionType.One,PositionState.Empty),
+                new Position(PositionType.Two,PositionState.Empty),
+                new Position(PositionType.Three,PositionState.Empty),
+                new Position(PositionType.Four,PositionState.Empty),
+                new Position(PositionType.Five,PositionState.Empty),
+                new Position(PositionType.Six,PositionState.Empty),
+                new Position(PositionType.Seven,PositionState.Empty),
+                new Position(PositionType.Eight,PositionState.Empty),
+                new Position(PositionType.Nine,PositionState.Empty),
             };
         }
         public IList<Position> Positions { get; private set; }
-        public IList<Move> Moves { get; private set; }
-        public void MovePlayer(Move move)
-        {
-            Moves.Add(move);
-        }
+        
     }
 }
