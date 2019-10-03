@@ -15,22 +15,56 @@ namespace Portal.Domain
             PlayerX = playerX;
             PlayerO = playerO;
 
-            Players = new List<Player>();
-            Players.Add(PlayerX);
-            Players.Add(PlayerO);
+            Players = new List<Player>
+            {
+                PlayerX,
+                PlayerO
+            };
 
         }
 
         public Board Board { get; private set; }
         public List<Player> Players { get; }
-        public Player PlayerX { get;  }
-        public Player PlayerO { get;  }
+        public Player PlayerX { get; }
+        public Player PlayerO { get; }
+
+        public GameResult GetWinner()
+        {
+            if (Moves.Count<5)
+            {
+                return GameResult.Play;
+            }
+
+            var xWins = Board.HasAllRow(PositionState.X);
+
+            if (xWins)
+            {
+                return GameResult.XWins;
+            }
+            var oWins = Board.HasAllRow(PositionState.X);
+            if (oWins)
+            {
+                return GameResult.OWins;
+            }
+
+            if (Moves.Count==9)
+            {
+                return GameResult.Draw;
+            }
+            else
+            {
+                return GameResult.Play;
+            }
+            
+        }
+
+
 
         public HashSet<Move> Moves { get; private set; }
 
         public OperationResult AddMove(Move move)
         {
-            if (Moves.Count>=9)
+            if (Moves.Count >= 9)
             {
                 OperationResult.BuildFailure(ErrorType.GameNoMoreMovesLeft);
             }
@@ -83,5 +117,13 @@ namespace Portal.Domain
             }
 
         }
+    }
+
+    public enum GameResult
+    {
+        Draw = 0,
+        XWins = 1,
+        OWins = 2,
+        Play = 3
     }
 }
