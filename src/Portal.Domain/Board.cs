@@ -49,7 +49,7 @@ namespace Portal.Domain
             var r3 = Positions[6].State == state && Positions[7].State == state && Positions[8].State == state;
 
             //--- vertical
-            var r4 = Positions[0].State == state && Positions[2].State == state && Positions[6].State == state;
+            var r4 = Positions[0].State == state && Positions[3].State == state && Positions[6].State == state;
             var r5 = Positions[1].State == state && Positions[4].State == state && Positions[7].State == state;
             var r6 = Positions[2].State == state && Positions[5].State == state && Positions[8].State == state;
 

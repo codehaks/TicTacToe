@@ -41,7 +41,7 @@ namespace Portal.Domain
             {
                 return GameResult.XWins;
             }
-            var oWins = Board.HasAllRow(PositionState.X);
+            var oWins = Board.HasAllRow(PositionState.O);
             if (oWins)
             {
                 return GameResult.OWins;

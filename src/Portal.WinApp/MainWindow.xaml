@@ -1,0 +1,26 @@
+﻿<Window x:Class="Portal.WinApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Portal.WinApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="280">
+    <Grid>
+
+        <Button Name="Button1" Content="" HorizontalAlignment="Left" Margin="58,103,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button_Click_1"/>
+        <Button Name="Button2" Content="" HorizontalAlignment="Left" Margin="118,103,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button2_Click"/>
+        <Button Name="Button3" Content="" HorizontalAlignment="Left" Margin="178,103,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button3_Click"/>
+
+        <Button Name="Button4" Content="" HorizontalAlignment="Left" Margin="58,163,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button4_Click"/>
+        <Button Name="Button5" Content="" HorizontalAlignment="Left" Margin="118,163,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button5_Click"/>
+        <Button Name="Button6" Content="" HorizontalAlignment="Left" Margin="178,163,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button6_Click"/>
+
+        <Button Name="Button7" Content="" HorizontalAlignment="Left" Margin="58,223,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button7_Click"/>
+        <Button Name="Button8" Content="" HorizontalAlignment="Left" Margin="118,223,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button8_Click"/>
+        <Button Name="Button9" Content="" HorizontalAlignment="Left" Margin="178,223,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Button9_Click"/>
+        <Label Name="ResultMessage" Content="Play" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="30" Height="62" Margin="48,306,0,0" VerticalAlignment="Top" Width="182"/>
+        <Label Content="Tic-Tac-Toe" HorizontalAlignment="Left" FontSize="50" Margin="10,21,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
