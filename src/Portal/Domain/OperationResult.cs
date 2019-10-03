@@ -35,6 +35,8 @@ namespace Portal.Domain
 
         PositionStateIsNotEmpty,
 
-        BoardPositionAleadyForked
+        BoardPositionAleadyForked,
+
+        MoveAlreadyExsited
     }
 }

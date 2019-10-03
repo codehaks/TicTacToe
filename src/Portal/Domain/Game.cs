@@ -10,6 +10,7 @@ namespace Portal.Domain
         public Game(Player player1,Player player2)
         {
             Board = new Board();
+            Moves = new HashSet<Move>();
 
             Player1 = player1;
             Player2 = player2;
@@ -19,22 +20,32 @@ namespace Portal.Domain
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
 
-        public IList<Move> Moves { get; private set; }
+        public HashSet<Move> Moves { get; private set; }
 
         public OperationResult MovePlayer(Move move)
         {
-            var position = Board.Positions.Single(p => p.Type == move.PositionType);
-            if (position.State==PositionState.Empty)
-            {
-                Board.Fork(move.PositionType, move.Player.Marker);
-                Moves.Add(move);
-                
+         
+            var fork= Board.Fork(move.PositionType, move.Player.Marker);
 
-                return OperationResult.BuildSuccess();
+            if (fork.Success)
+            {
+
+                var moveAdded = Moves.Add(move);
+
+                if (moveAdded)
+                {
+                    return OperationResult.BuildSuccess();
+                }
+                else
+                {
+                    return OperationResult.BuildFailure(ErrorType.MoveAlreadyExsited);
+                }
+
+                
             }
             else
             {
-                return OperationResult.BuildFailure("Position already forked");
+                return OperationResult.BuildFailure(ErrorType.BoardPositionAleadyForked);
             }
             
         }

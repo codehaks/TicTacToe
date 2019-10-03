@@ -21,6 +21,21 @@ namespace Portal.Test
         }
 
         [Fact]
+        public void FailOnRepeatingSameMove()
+        {
+            var x = new Player("X", MarkerType.X);
+            var o = new Player("O", MarkerType.O);
+
+            var game = new Game(x, o);
+
+            var move1 = game.MovePlayer(new Move(x, PositionType.Five));
+            var move2 = game.MovePlayer(new Move(x, PositionType.Five));
+
+            Assert.False(move2.Success);
+            //Assert.True(move2.ErrorType == ErrorType.MoveAlreadyExsited);
+        }
+
+        [Fact]
         public void FailOnForkingNotEmptyPosition()
         {
             var x = new Player("X", MarkerType.X);
