@@ -12,7 +12,31 @@ namespace Portal.Domain
             State = PositionState.Empty;
         }
         public PositionType Type { get; private set; }
-        public PositionState State { get; set; }
+        public PositionState State { get;private set; }
+
+        public ActionResult Mark(MarkerType markerType)
+        {
+            if (State==PositionState.Empty)
+            {
+                switch (markerType)
+                {
+                    case MarkerType.X:
+                        State = PositionState.X;
+                        break;
+                    case MarkerType.O:
+                        State = PositionState.O;
+                        break;
+                    default:
+                        break;
+                }
+
+                return ActionResult.BuildSuccess();
+            }
+            else
+            {
+                return ActionResult.BuildFailure(ErrorType.PositionStateIsNotEmpty);
+            }
+        }
     }
 
     public enum PositionType
