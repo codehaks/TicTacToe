@@ -28,9 +28,12 @@ namespace Portal.Domain
 
         public HashSet<Move> Moves { get; private set; }
 
-        public OperationResult MovePlayer(Move move)
+        public OperationResult AddMove(Move move)
         {
-
+            if (Moves.Count>=9)
+            {
+                OperationResult.BuildFailure(ErrorType.GameNoMoreMovesLeft);
+            }
             var fork = Board.Fork(move.PositionType, move.Player.Marker);
 
             if (fork.Success)

@@ -14,8 +14,8 @@ namespace Portal.Test
 
             var game = new Game(x, o);
 
-            var move1=game.MovePlayer(new Move(x, PositionType.Five));
-            var move2=game.MovePlayer(new Move(x, PositionType.Four));
+            var move1=game.AddMove(new Move(x, PositionType.Five));
+            var move2=game.AddMove(new Move(x, PositionType.Four));
 
             Assert.False(move2.Success);
         }
@@ -28,8 +28,8 @@ namespace Portal.Test
 
             var game = new Game(x, o);
 
-            var move1 = game.MovePlayer(new Move(x, PositionType.Five));
-            var move2 = game.MovePlayer(new Move(x, PositionType.Five));
+            var move1 = game.AddMove(new Move(x, PositionType.Five));
+            var move2 = game.AddMove(new Move(x, PositionType.Five));
 
             Assert.False(move2.Success);
             //Assert.True(move2.ErrorType == ErrorType.MoveAlreadyExsited);
@@ -43,8 +43,8 @@ namespace Portal.Test
 
             var game = new Game(x, o);
 
-            var move1 = game.MovePlayer(new Move(x, PositionType.Five));
-            var move2 = game.MovePlayer(new Move(x, PositionType.Six));
+            var move1 = game.AddMove(new Move(x, PositionType.Five));
+            var move2 = game.AddMove(new Move(x, PositionType.Six));
 
             Assert.False(move2.Success);
             Assert.True(move2.ErrorType == ErrorType.GameNotPlayerTurn);
@@ -58,8 +58,8 @@ namespace Portal.Test
 
             var game = new Game(x, o);
 
-            var move1 = game.MovePlayer(new Move(x, PositionType.Five));
-            var move2 = game.MovePlayer(new Move(o, PositionType.Five));
+            var move1 = game.AddMove(new Move(x, PositionType.Five));
+            var move2 = game.AddMove(new Move(o, PositionType.Five));
 
             Assert.False(move2.Success);
         }
