@@ -37,6 +37,7 @@ namespace Portal.Domain
 
         BoardPositionAleadyForked,
 
-        MoveAlreadyExsited
+        MoveAlreadyExsited,
+        GameNotPlayerTurn
     }
 }
