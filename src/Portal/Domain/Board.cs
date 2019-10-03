@@ -23,20 +23,20 @@ namespace Portal.Domain
             };
         }
 
-        internal ActionResult Fork(PositionType positionType,MarkerType marker)
+        internal OperationResult Fork(PositionType positionType,MarkerType marker)
         {
             var pos=Positions.Single(p => p.Type == positionType);
             var result=pos.Mark(marker);
             if (result.Success)
             {
-                return ActionResult.BuildSuccess();
+                return OperationResult.BuildSuccess();
             }
             else if(result.ErrorType==ErrorType.PositionStateIsNotEmpty)
             {
-                return ActionResult.BuildFailure(ErrorType.BoardPositionAleadyForked);
+                return OperationResult.BuildFailure(ErrorType.BoardPositionAleadyForked);
             }
 
-            return ActionResult.BuildFailure();
+            return OperationResult.BuildFailure();
         }
 
         public IList<Position> Positions { get; private set; }

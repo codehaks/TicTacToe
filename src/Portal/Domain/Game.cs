@@ -21,7 +21,7 @@ namespace Portal.Domain
 
         public IList<Move> Moves { get; private set; }
 
-        public ActionResult MovePlayer(Move move)
+        public OperationResult MovePlayer(Move move)
         {
             var position = Board.Positions.Single(p => p.Type == move.PositionType);
             if (position.State==PositionState.Empty)
@@ -30,11 +30,11 @@ namespace Portal.Domain
                 Moves.Add(move);
                 
 
-                return ActionResult.BuildSuccess();
+                return OperationResult.BuildSuccess();
             }
             else
             {
-                return ActionResult.BuildFailure("Position already forked");
+                return OperationResult.BuildFailure("Position already forked");
             }
             
         }

@@ -14,7 +14,7 @@ namespace Portal.Domain
         public PositionType Type { get; private set; }
         public PositionState State { get;private set; }
 
-        public ActionResult Mark(MarkerType markerType)
+        public OperationResult Mark(MarkerType markerType)
         {
             if (State==PositionState.Empty)
             {
@@ -30,11 +30,11 @@ namespace Portal.Domain
                         break;
                 }
 
-                return ActionResult.BuildSuccess();
+                return OperationResult.BuildSuccess();
             }
             else
             {
-                return ActionResult.BuildFailure(ErrorType.PositionStateIsNotEmpty);
+                return OperationResult.BuildFailure(ErrorType.PositionStateIsNotEmpty);
             }
         }
     }
