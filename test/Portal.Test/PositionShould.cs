@@ -26,7 +26,8 @@ namespace Portal.Test
             var markOnEmpty = position.Mark(markerType);
             var markOnX = position.Mark(markerType);
 
-            Assert.True(markOnEmpty.Success && markOnX.Success == false);
+            Assert.True(markOnEmpty.Success);
+            Assert.False(markOnX.Success);
         }
 
         [Fact]
