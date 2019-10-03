@@ -63,5 +63,17 @@ namespace Portal.Test
 
             Assert.False(move2.Success);
         }
+
+        [Fact]
+        public void StartWithPlayerXTurn()
+        {
+            var x = new Player("X", MarkerType.X);
+            var o = new Player("O", MarkerType.O);
+
+            var game = new Game(x, o);
+
+            var firstPlayer = game.GetNextTurn();
+            Assert.Equal(x, firstPlayer);
+        }
     }
 }

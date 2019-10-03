@@ -7,18 +7,24 @@ namespace Portal.Domain
 {
     public class Game
     {
-        public Game(Player player1, Player player2)
+        public Game(Player playerX, Player playerO)
         {
             Board = new Board();
             Moves = new HashSet<Move>();
 
-            Player1 = player1;
-            Player2 = player2;
+            PlayerX = playerX;
+            PlayerO = playerO;
+
+            Players = new List<Player>();
+            Players.Add(PlayerX);
+            Players.Add(PlayerO);
+
         }
 
         public Board Board { get; private set; }
-        public Player Player1 { get; private set; }
-        public Player Player2 { get; private set; }
+        public List<Player> Players { get; }
+        public Player PlayerX { get;  }
+        public Player PlayerO { get;  }
 
         public HashSet<Move> Moves { get; private set; }
 
@@ -59,18 +65,18 @@ namespace Portal.Domain
             if (Moves.Any())
             {
                 var lastPlayer = Moves.Last().Player;
-                if (Player1 == lastPlayer)
+                if (PlayerX == lastPlayer)
                 {
-                    return Player2;
+                    return PlayerO;
                 }
                 else
                 {
-                    return Player1;
+                    return PlayerX;
                 }
             }
             else
             {
-                return null;
+                return PlayerX;
             }
 
         }
