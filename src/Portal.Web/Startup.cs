@@ -27,7 +27,7 @@ namespace Portal.Web
             services.AddLiteDb(@"Games.db");
 
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<PortalDbContext>();
 
             services.AddRazorPages();
@@ -43,6 +43,8 @@ namespace Portal.Web
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
