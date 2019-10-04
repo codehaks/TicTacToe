@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Portal.Persistance;
+using Portal.Web.Common;
 
 namespace Portal.Web
 {
@@ -21,7 +22,9 @@ namespace Portal.Web
         {
 
             services.AddDbContext<PortalDbContext>(options =>
-                    options.UseSqlite("DataSource=bug.sqlite"));
+                    options.UseSqlite("DataSource=Identity.sqlite"));
+
+            services.AddLiteDb(@"Games.db");
 
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
