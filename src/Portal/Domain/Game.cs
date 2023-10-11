@@ -3,127 +3,126 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Portal.Domain
+namespace Portal.Domain;
+
+public class Game
 {
-    public class Game
+    public Game(Player playerX, Player playerO)
     {
-        public Game(Player playerX, Player playerO)
+        Board = new Board();
+        Moves = new HashSet<Move>();
+
+        PlayerX = playerX;
+        PlayerO = playerO;
+
+        Players = new List<Player>
         {
-            Board = new Board();
-            Moves = new HashSet<Move>();
+            PlayerX,
+            PlayerO
+        };
 
-            PlayerX = playerX;
-            PlayerO = playerO;
+    }
 
-            Players = new List<Player>
-            {
-                PlayerX,
-                PlayerO
-            };
+    public Board Board { get; private set; }
+    public List<Player> Players { get; }
+    public Player PlayerX { get; }
+    public Player PlayerO { get; }
 
+    public GameResult GetWinner()
+    {
+        if (Moves.Count<5)
+        {
+            return GameResult.Play;
         }
 
-        public Board Board { get; private set; }
-        public List<Player> Players { get; }
-        public Player PlayerX { get; }
-        public Player PlayerO { get; }
+        var xWins = Board.HasAllRow(PositionState.X);
 
-        public GameResult GetWinner()
+        if (xWins)
         {
-            if (Moves.Count<5)
-            {
-                return GameResult.Play;
-            }
-
-            var xWins = Board.HasAllRow(PositionState.X);
-
-            if (xWins)
-            {
-                return GameResult.XWins;
-            }
-            var oWins = Board.HasAllRow(PositionState.X);
-            if (oWins)
-            {
-                return GameResult.OWins;
-            }
-
-            if (Moves.Count==9)
-            {
-                return GameResult.Draw;
-            }
-            else
-            {
-                return GameResult.Play;
-            }
-            
+            return GameResult.XWins;
+        }
+        var oWins = Board.HasAllRow(PositionState.X);
+        if (oWins)
+        {
+            return GameResult.OWins;
         }
 
-
-
-        public HashSet<Move> Moves { get; private set; }
-
-        public OperationResult AddMove(Move move)
+        if (Moves.Count==9)
         {
-            if (Moves.Count >= 9)
-            {
-                OperationResult.BuildFailure(ErrorType.GameNoMoreMovesLeft);
-            }
-            var fork = Board.Fork(move.PositionType, move.Player.Marker);
+            return GameResult.Draw;
+        }
+        else
+        {
+            return GameResult.Play;
+        }
+        
+    }
 
-            if (fork.Success)
+
+
+    public HashSet<Move> Moves { get; private set; }
+
+    public OperationResult AddMove(Move move)
+    {
+        if (Moves.Count >= 9)
+        {
+            OperationResult.BuildFailure(ErrorType.GameNoMoreMovesLeft);
+        }
+        var fork = Board.Fork(move.PositionType, move.Player.Marker);
+
+        if (fork.Success)
+        {
+            var nextPlayer = GetNextTurn();
+            if (nextPlayer == move.Player)
             {
-                var nextPlayer = GetNextTurn();
-                if (nextPlayer == move.Player)
+                var moveAdded = Moves.Add(move);
+
+                if (moveAdded)
                 {
-                    var moveAdded = Moves.Add(move);
-
-                    if (moveAdded)
-                    {
-                        return OperationResult.BuildSuccess();
-                    }
-                    else
-                    {
-                        return OperationResult.BuildFailure(ErrorType.MoveAlreadyExsited);
-                    }
+                    return OperationResult.BuildSuccess();
                 }
                 else
                 {
-                    return OperationResult.BuildFailure(ErrorType.GameNotPlayerTurn);
+                    return OperationResult.BuildFailure(ErrorType.MoveAlreadyExsited);
                 }
             }
             else
             {
-                return OperationResult.BuildFailure(ErrorType.BoardPositionAleadyForked);
+                return OperationResult.BuildFailure(ErrorType.GameNotPlayerTurn);
             }
         }
-
-        public Player GetNextTurn()
+        else
         {
-            if (Moves.Any())
+            return OperationResult.BuildFailure(ErrorType.BoardPositionAleadyForked);
+        }
+    }
+
+    public Player GetNextTurn()
+    {
+        if (Moves.Any())
+        {
+            var lastPlayer = Moves.Last().Player;
+            if (PlayerX == lastPlayer)
             {
-                var lastPlayer = Moves.Last().Player;
-                if (PlayerX == lastPlayer)
-                {
-                    return PlayerO;
-                }
-                else
-                {
-                    return PlayerX;
-                }
+                return PlayerO;
             }
             else
             {
                 return PlayerX;
             }
-
         }
-    }
+        else
+        {
+            return PlayerX;
+        }
 
-    public enum GameResult
-    {
-        Draw = 0,
-        XWins = 1,
-        OWins = 2,
-        Play = 3
     }
+}
+
+public enum GameResult
+{
+    Draw = 0,
+    XWins = 1,
+    OWins = 2,
+    Play = 3
 }

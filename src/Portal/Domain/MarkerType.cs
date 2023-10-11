@@ -1,8 +1,7 @@
-﻿namespace Portal.Domain
+﻿namespace Portal.Domain;
+
+public enum MarkerType
 {
-    public enum MarkerType
-    {
-        X=1,
-        O=2
-    }
+    X=1,
+    O=2
 }
